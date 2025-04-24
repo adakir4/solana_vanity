@@ -1,0 +1,13 @@
+[package]
+name = "solana_vanity"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ed25519-dalek = { version = "2.1.1", features = ["rand_core"] }
+rand_core = { version = "0.6", features = ["getrandom"] }
+bs58 = "0.5"
+rayon = "1.8"
+num_cpus = "1.16"
+clap = { version = "4.4.7", features = ["derive"] }
+
