@@ -68,10 +68,14 @@ fn main() {
                 }
             }
 
-            if pubkey_bs58.to_lowercase().starts_with(&prefix) {
+            if pubkey_bs58.starts_with(&prefix) {
+                if args.force_lowercase && !pubkey_bs58[..prefix.len()].chars().all(|c| c.is_lowercase()) {
+                    continue;
+                }
+            
                 local_found.store(true, Ordering::Relaxed);
                 let elapsed = start_time.elapsed();
-
+            
                 println!("\n🎉 Match found on thread {} after {} tries!", thread_id, tries);
                 println!("⏱️  Elapsed time: {}", format_duration(elapsed));
                 println!("🔑 Public Key:  {}", pubkey_bs58);
@@ -80,6 +84,7 @@ fn main() {
                     bs58::encode(signing_key.to_keypair_bytes()).into_string()
                 );
             }
+            
         }
     });
 }
