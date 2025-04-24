@@ -13,6 +13,10 @@ use rayon::prelude::*;
 struct Args {
     /// Base58 prefix to match
     prefix: String,
+
+    /// Force match only if the prefix in the public key is lowercase
+    #[arg(long)]
+    force_lowercase: bool,
 }
 
 fn format_duration(dur: Duration) -> String {
